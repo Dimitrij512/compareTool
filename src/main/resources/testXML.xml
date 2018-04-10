@@ -1,0 +1,168 @@
+<XMI.main>
+	<XMI.header>
+		<XMI.documentation>
+			<XMI.exporter>ASG-Rochade XML Facilities Exporter</XMI.exporter>
+			<XMI.exporterVersion>2.70.003</XMI.exporterVersion>
+		</XMI.documentation>
+		<XMI.model xmi.name='RNX' 
+				xmi.version='1.6'/>
+		<XMI.model xmi.name='METAAPPS' 
+				xmi.version='PRODUCTION' 
+				href='rochade://gechem12r2qa2.asg.com:8888/ADMIN/AP-DATA/S/METAAPPS/PRODUCTION'>Anlage   15.06.2017     11:18:31
+		</XMI.model>
+	</XMI.header>
+	<XMI.content xmi.uuid='XMLDsp|SERVER1|AP-DATA|ADMIN|S|METAAPPS|PRODUCTION' 
+			uuidDel='|'>
+		<ITEM xmi.id='_4' 
+				itemType='DWR_DAT_PACKAGE' 
+				itemName='$$DefaultDataTypes'>
+			<ATTRIBUTES>
+				<ATTRIBUTE attrType='Lnk' 
+						attrName='DWR_DAT_HAS_TYPE' 
+						linkType='Xns'>
+					<ITEMS>
+						<ITEM xmi.id='_2' 
+								itemType='DWR_DAT_DATA_TYPE' 
+								itemName='nvarchar' 
+								itemScope='_4'/>
+					</ITEMS>
+				</ATTRIBUTE>
+			</ATTRIBUTES>
+		</ITEM>
+		<ITEM xmi.id='_11' 
+				itemType='SQL/SERVER' 
+				itemName='DECHEQADEV01P'/>
+		<ITEM xmi.id='_9' 
+				itemType='SQL/DATABASE' 
+				itemName='Northwind' 
+				itemScope='_11'/>
+		<ITEM xmi.id='_7' 
+				itemType='SQL/SCHEMA' 
+				itemName='dbo' 
+				itemScope='_9'/>
+		<ITEM xmi.id='_5' 
+				itemType='SQL/TABLE' 
+				itemName='Categories' 
+				itemScope='_7'/>
+		<ITEM xmi.id='_1' 
+				itemType='SQL/COLUMN' 
+				itemName='CategoryName' 
+				itemScope='_5'/>
+		<ITEM xmi.id='_10' 
+				itemType='DWR_RDB_DB_SYSTEM' 
+				itemName='DECHEQADEV01P'>
+			<ATTRIBUTES>
+				<ATTRIBUTE attrType='Lnk' 
+						attrName='DWR_RDB_HAS_DATABASE' 
+						linkType='Xns'>
+					<ITEMS>
+						<ITEM xmi.id='_8' 
+								itemType='DWR_RDB_DATABASE' 
+								itemName='Northwind' 
+								itemScope='_10'>
+							<ATTRIBUTES>
+								<ATTRIBUTE attrType='Lnk' 
+										attrName='DWR_RDB_HAS_SCHEMA' 
+										linkType='Xns'>
+									<ITEMS>
+										<ITEM xmi.id='_6' 
+												itemType='DWR_RDB_SCHEMA' 
+												itemName='dbo' 
+												itemScope='_8'>
+											<ATTRIBUTES>
+												<ATTRIBUTE attrType='Lnk' 
+														attrName='DWR_RDB_HAS_TABLE_OR_VIEW' 
+														linkType='Xns'>
+													<ITEMS>
+														<ITEM xmi.id='_3' 
+																itemType='DWR_RDB_TABLE_OR_VIEW' 
+																itemName='Categories' 
+																itemScope='_6'>
+															<ATTRIBUTES>
+																<ATTRIBUTE attrType='Lnk' 
+																		attrName='DWR_RDB_HAS_COLUMN' 
+																		linkType='Xns'>
+																	<ITEMS>
+																		<ITEM xmi.id='_0' 
+																				itemType='DWR_RDB_COLUMN' 
+																				itemName='CategoryName' 
+																				itemScope='_3'>
+																			<ATTRIBUTES>
+																				<ATTRIBUTE attrType='Txt' 
+																						attrName='DWR_USER_ID_LAST_UPDATE' 
+																						contentType='text/plain'>ADMIN</ATTRIBUTE>
+																				<ATTRIBUTE attrType='Txt' 
+																						attrName='DWR_USER_ID_CREATION' 
+																						contentType='text/plain'>ADMIN</ATTRIBUTE>
+																				<ATTRIBUTE attrType='Txt' 
+																						attrName='DWR_TIME_LAST_UPDATE' 
+																						contentType='text/plain'>2017-07-06 14:48:14</ATTRIBUTE>
+																				<ATTRIBUTE attrType='Txt' 
+																						attrName='DWR_TIME_CREATION' 
+																						contentType='text/plain'>2017-07-06 14:48:14</ATTRIBUTE>
+																				<ATTRIBUTE attrType='Txt' 
+																						attrName='DWR_RECONCILED' 
+																						contentType='text/plain'>true</ATTRIBUTE>
+																				<ATTRIBUTE attrType='Txt' 
+																						attrName='DWR_RDB_NULLS_ALLOWED' 
+																						contentType='text/plain'>false</ATTRIBUTE>
+																				<ATTRIBUTE attrType='Txt' 
+																						attrName='DWR_OWNER' 
+																						contentType='text/plain'>ADMIN</ATTRIBUTE>
+																				<ATTRIBUTE attrType='Txt' 
+																						attrName='DWR_HISTORY' 
+																						contentType='text/plain'>ADMIN
+2017/07/06 02:48 pm
+Updated from MS SQL Server</ATTRIBUTE>
+																				<ATTRIBUTE attrType='Txt' 
+																						attrName='DWR_DESCRIPTION' 
+																						contentType='text/plain'>General additional remarks
+- examples
+- demarcations
+- explanations</ATTRIBUTE>
+																				<ATTRIBUTE attrType='Txt' 
+																						attrName='DWR_DAT_LENGTH' 
+																						contentType='text/plain'>15</ATTRIBUTE>
+																				<ATTRIBUTE attrType='Txt' 
+																						attrName='DEFINITION' 
+																						contentType='text/plain'>DECHEQADEV01P.Northwind.dbo.Categories.CategoryName</ATTRIBUTE>
+																				<ATTRIBUTE attrType='Lnk' 
+																						attrName='DWR_RDB_ORIGINS_COLUMN' 
+																						linkType='Set'>
+																					<ITEMS>
+																						<ITEM xmi.idref='_1' 
+																								itemType='SQL/COLUMN' 
+																								itemName='CategoryName' 
+																								itemScope='_5'/>
+																					</ITEMS>
+																				</ATTRIBUTE>
+																				<ATTRIBUTE attrType='Lnk' 
+																						attrName='DWR_DAT_OF_TYPE' 
+																						linkType='Set'>
+																					<ITEMS>
+																						<ITEM xmi.idref='_2' 
+																								itemType='DWR_DAT_DATA_TYPE' 
+																								itemName='nvarchar' 
+																								itemScope='_4'/>
+																					</ITEMS>
+																				</ATTRIBUTE>
+																			</ATTRIBUTES>
+																		</ITEM>
+																	</ITEMS>
+																</ATTRIBUTE>
+															</ATTRIBUTES>
+														</ITEM>
+													</ITEMS>
+												</ATTRIBUTE>
+											</ATTRIBUTES>
+										</ITEM>
+									</ITEMS>
+								</ATTRIBUTE>
+							</ATTRIBUTES>
+						</ITEM>
+					</ITEMS>
+				</ATTRIBUTE>
+			</ATTRIBUTES>
+		</ITEM>
+	</XMI.content>
+</XMI.main>
