@@ -14,10 +14,8 @@ public class Attribute {
     @XStreamAsAttribute
     String attrType;
 
-
     @XStreamAsAttribute
     String attrName;
-
 
     @XStreamAsAttribute
     String linkType;

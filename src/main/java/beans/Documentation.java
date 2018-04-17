@@ -8,6 +8,7 @@ import lombok.Data;
 public class Documentation {
     @XStreamAlias("XMI.exporter")
     private String exporter;
+
     @XStreamAlias("XMI.exporterVersion")
     private String version;
 }

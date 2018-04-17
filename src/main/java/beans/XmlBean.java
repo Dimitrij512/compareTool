@@ -6,7 +6,6 @@ import lombok.Data;
 @Data
 @XStreamAlias("XMI.main")
 public class XmlBean {
-
     @XStreamAlias("XMI.header")
     Header header;
 

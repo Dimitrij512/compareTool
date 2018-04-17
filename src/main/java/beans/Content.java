@@ -9,10 +9,10 @@ import java.util.List;
 @Data
 @XStreamAlias("XMI.content")
 public class Content {
-
     @XStreamAlias("xmi.uuid")
     @XStreamAsAttribute
     String uuid;
+
     @XStreamAlias("uuidDel")
     @XStreamAsAttribute
     String uuiDel;

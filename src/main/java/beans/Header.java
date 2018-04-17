@@ -11,6 +11,7 @@ import java.util.List;
 public class Header {
     @XStreamAlias("XMI.documentation")
     private Documentation documentation;
+
     @XStreamImplicit
     private List<Model> models;
 }
