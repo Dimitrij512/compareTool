@@ -4,6 +4,8 @@ import beans.Attributes;
 import beans.Item;
 import beans.Items;
 import beans.XmlBean;
+import beans.interfaces.BeanItemVisitor;
+import beans.visitor.BeanItemVisitrorIml;
 import com.thoughtworks.xstream.XStream;
 import main.Main;
 import org.eclipse.swt.SWT;
@@ -19,6 +21,8 @@ import java.util.Optional;
 import java.util.stream.IntStream;
 
 public class Transform {
+
+    private BeanItemVisitor vizitor = new BeanItemVisitrorIml();
 
     // TODO It is temporary method, here need implementation for choose files
     public XmlBean getXMLBean(String path) {
@@ -112,7 +116,6 @@ public class Transform {
 
         TreeItem contentUuidDel = new TreeItem(content, SWT.NONE);
         contentUuidDel.setText(new String[] {"xmi.uuidDel", firstFile.getContent().getUuiDel()});
-
         createListItems(content, firstFile);
 
         return content;
@@ -120,72 +123,8 @@ public class Transform {
 
     private void createListItems(TreeItem content, XmlBean firstFile){
         IntStream.range(0, firstFile.getContent().getItems().size()).forEachOrdered(index ->{
-
             Optional<Item> xmlItem = Optional.of(firstFile.getContent().getItems().get(index));
-
-            TreeItem item = new TreeItem(content, SWT.NONE);
-            item.setText(new String[] {"ITEM"});
-
-            TreeItem itemId = new TreeItem(item, SWT.NONE);
-            itemId.setText(new String[] {"xmi.id", xmlItem.get().getId()});
-
-            TreeItem itemType = new TreeItem(item, SWT.NONE);
-            itemType.setText(new String[] {"itemType", firstFile.getContent().getItems().get(index).getItemType()});
-
-            TreeItem itemName = new TreeItem(item, SWT.NONE);
-            itemName.setText(new String[] {"itemName", firstFile.getContent().getItems().get(index).getItemName()});
-
-            if(firstFile.getContent().getItems().get(index).getAtributes() != null) {
-                IntStream.range(0, firstFile.getContent().getItems().get(index).getAtributes().size()).forEachOrdered(indexAttr ->{
-
-                    Optional<Attributes> xmlAttributes = Optional.of(firstFile.getContent().getItems().get(index).getAtributes().get(indexAttr));
-
-                    TreeItem attributes = new TreeItem(item, SWT.NONE);
-                    attributes.setText(new String[] {"ATTRIBUTES"});
-
-                    IntStream.range(0, xmlAttributes.get().getAttribute().size()).forEachOrdered(indexAttribute -> {
-
-                        TreeItem attribute = new TreeItem(attributes, SWT.NONE);
-                        attribute.setText(new String[] {"ATTRIBUTE"});
-
-                        TreeItem attrType = new TreeItem(attribute, SWT.NONE);
-                        attrType.setText(new String[] {"attrType", firstFile.getContent().getItems().get(index).getAtributes().get(indexAttr).getAttribute().get(indexAttribute).getAttrType()});
-
-                        TreeItem attrName = new TreeItem(attribute, SWT.NONE);
-                        attrName.setText(new String[] {"attrName", firstFile.getContent().getItems().get(index).getAtributes().get(indexAttr).getAttribute().get(indexAttribute).getAttrName()});
-
-                        TreeItem linkType = new TreeItem(attribute, SWT.NONE);
-                        linkType.setText(new String[] {"linkType", firstFile.getContent().getItems().get(index).getAtributes().get(indexAttr).getAttribute().get(indexAttribute).getLinkType()});
-
-                        if(xmlAttributes.get().getAttribute().get(indexAttribute).getItems() != null) {
-
-                            IntStream.range(0, xmlAttributes.get().getAttribute().get(indexAttribute).getItems().size()).forEachOrdered(indexAttrItem -> {
-
-                                Optional<Items> xmlAttributesItems = Optional.of(xmlAttributes.get().getAttribute().get(indexAttribute).getItems().get(indexAttrItem));
-                                TreeItem attributeItems = new TreeItem(attribute, SWT.NONE);
-                                attributeItems.setText(new String[] {"ITEMS"});
-
-                                IntStream.range(0,xmlAttributesItems.get().getItems().size()).forEachOrdered(indexAttrItems ->{
-
-                                    TreeItem attributeItem = new TreeItem(attributeItems, SWT.NONE);
-                                    attributeItem.setText(new String[] {"ITEM"});
-
-                                    TreeItem attributeItemId = new TreeItem(attributeItem, SWT.NONE);
-                                    attributeItemId.setText(new String[] {"xmi.id",xmlAttributesItems.get().getItems().get(indexAttrItems).getId()});
-
-                                    TreeItem attributeItemType = new TreeItem(attributeItem, SWT.NONE);
-                                    attributeItemType.setText(new String[] {"itemType", xmlAttributesItems.get().getItems().get(indexAttrItems).getItemType()});
-
-                                    TreeItem attributeItemName = new TreeItem(attributeItem, SWT.NONE);
-                                    attributeItemName.setText(new String[] {"itemName", xmlAttributesItems.get().getItems().get(indexAttrItems).getItemName()});
-                                    TreeItem attributeItemScope = new TreeItem(attributeItem, SWT.NONE);
-                                    attributeItemScope.setText(new String[] {"itemScope", xmlAttributesItems.get().getItems().get(indexAttrItems).getScope()});
-                                });
-                            });
-                        }
-                    });
-                });
-            }
+            xmlItem.get().accept(vizitor,content);
         });
     }
 }
