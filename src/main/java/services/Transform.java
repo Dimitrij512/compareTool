@@ -5,7 +5,6 @@ import beans.XmlBean;
 import beans.interfaces.BeanItemVisitor;
 import beans.visitor.BeanItemVisitrorIml;
 import com.thoughtworks.xstream.XStream;
-import main.Main;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Display;

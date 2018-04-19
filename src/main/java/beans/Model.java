@@ -2,8 +2,10 @@ package beans;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
+@EqualsAndHashCode(exclude={"id", "version"})
 @XStreamAlias("XMI.model")
 public class Model {
 

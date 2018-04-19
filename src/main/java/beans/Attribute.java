@@ -6,11 +6,13 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
 import com.thoughtworks.xstream.annotations.XStreamImplicit;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.eclipse.swt.widgets.TreeItem;
 
 import java.util.List;
 
 @Data
+@EqualsAndHashCode
 @XStreamAlias("ATTRIBUTE")
 public class Attribute implements ItemElement {
 
