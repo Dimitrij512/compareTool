@@ -28,7 +28,7 @@ public class Transform {
         xstream.processAnnotations(XmlBean.class);
         xstream.ignoreUnknownElements();
 
-        File xmlFile = new File(Main.class.getClassLoader().getResource("testXML.xml").getFile());
+        File xmlFile = new File(path);
 
         System.out.println(xstream.toXML(xstream.fromXML(xmlFile)));
 
@@ -44,10 +44,19 @@ public class Transform {
         Tree treeFirst = new Tree(shell, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL);
         treeFirst.setHeaderVisible(true);
 
+        Tree treeSecond = new Tree(shell, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL);
+        treeSecond.setHeaderVisible(true);
+
         TreeColumn column1 = createColumn(treeFirst, "The path first file");
         TreeColumn column2 = createColumn(treeFirst, "Value");
         TreeItem header = createHeader(treeFirst, firstFile);
         TreeItem content = createContent(treeFirst,firstFile);
+
+        TreeColumn sTcolumn1 = createColumn(treeSecond, "The path second file");
+        TreeColumn sTcolumn2 = createColumn(treeSecond, "Value");
+        TreeItem sTheader = createHeader(treeSecond, secondFile);
+        TreeItem sTcontent = createContent(treeSecond,secondFile);
+
 
         shell.pack();
         shell.open();
