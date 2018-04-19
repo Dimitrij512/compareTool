@@ -1,8 +1,6 @@
 package services;
 
-import beans.Attributes;
 import beans.Item;
-import beans.Items;
 import beans.XmlBean;
 import beans.interfaces.BeanItemVisitor;
 import beans.visitor.BeanItemVisitrorIml;
@@ -26,7 +24,6 @@ public class Transform {
 
     // TODO It is temporary method, here need implementation for choose files
     public XmlBean getXMLBean(String path) {
-
         XStream xstream = new XStream();
         xstream.processAnnotations(XmlBean.class);
         xstream.ignoreUnknownElements();
@@ -124,7 +121,7 @@ public class Transform {
     private void createListItems(TreeItem content, XmlBean firstFile){
         IntStream.range(0, firstFile.getContent().getItems().size()).forEachOrdered(index ->{
             Optional<Item> xmlItem = Optional.of(firstFile.getContent().getItems().get(index));
-            xmlItem.get().accept(vizitor,content);
+            xmlItem.get().accept(vizitor, content);
         });
     }
 }
