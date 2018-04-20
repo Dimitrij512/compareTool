@@ -4,10 +4,10 @@
 			<XMI.exporter>ASG-Rochade XML Facilities Exporter</XMI.exporter>
 			<XMI.exporterVersion>2.70.003</XMI.exporterVersion>
 		</XMI.documentation>
-		<XMI.model xmi.name='RNX' 
+		<XMI.model xmi.name='RN.X'
 				xmi.version='1.6'/>
-		<XMI.model xmi.name='METAAPPS' 
-				xmi.version='PRODUCTION' 
+		<XMI.model xmi.name='METAAdPPS test'
+				xmi.version='PRODUCTION test'
 				href='rochade://gechem12r2qa2.asg.com:8888/ADMIN/AP-DATA/S/METAAPPS/PRODUCTION'>Anlage   15.06.2017     11:18:31
 		</XMI.model>
 	</XMI.header>
@@ -80,7 +80,7 @@
 																itemScope='_6'>
 															<ATTRIBUTES>
 																<ATTRIBUTE attrType='Lnk' 
-																		attrName='DWR_RDB_HAS_COLUMN' 
+																		attrName='DWR_RDB_HAS_COLUMN'
 																		linkType='Xns'>
 																	<ITEMS>
 																		<ITEM xmi.id='_0' 
