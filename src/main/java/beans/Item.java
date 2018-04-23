@@ -35,7 +35,7 @@ public class Item implements ItemElement {
     List<Attributes> atributes;
 
     @Override
-    public void accept(BeanItemVisitor visitor, TreeItem treeItem) {
-        visitor.visit(this, treeItem);
+    public void accept(BeanItemVisitor visitor, Object compaingItem, TreeItem treeItem) {
+        visitor.visit(this, compaingItem, treeItem);
     }
 }

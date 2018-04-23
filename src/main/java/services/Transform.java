@@ -1,6 +1,7 @@
 package services;
 
 import beans.Item;
+import beans.Model;
 import beans.XmlBean;
 import beans.interfaces.BeanItemVisitor;
 import beans.visitor.BeanItemVisitrorIml;
@@ -49,31 +50,13 @@ public class Transform {
         TreeColumn column1 = createColumn(treeFirst, "The path first file");
         TreeColumn column2 = createColumn(treeFirst, "Value");
         TreeItem header = createHeader(treeFirst, firstFile, secondFile);
-
-        if (!firstFile.getHeader().equals(secondFile.getHeader())) {
-            Service.setCollorNode(header).setExpanded(true);
-        }
-
         TreeItem content = createContent(treeFirst, firstFile, secondFile);
-
-        if (!firstFile.getContent().equals(secondFile.getContent())) {
-            Service.setCollorNode(content).setExpanded(true);
-        }
 
         TreeColumn sTcolumn1 = createColumn(treeSecond, "The path second file");
         TreeColumn sTcolumn2 = createColumn(treeSecond, "Value");
-
         TreeItem sTheader = createHeader(treeSecond, secondFile, firstFile);
 
-        if (!secondFile.getHeader().equals(firstFile.getHeader())) {
-            Service.setCollorNode(sTheader).setExpanded(true);
-        }
-
         TreeItem sTcontent = createContent(treeSecond, secondFile, firstFile);
-
-        if (!secondFile.getContent().equals(firstFile.getContent())) {
-            Service.setCollorNode(sTcontent).setExpanded(true);
-        }
 
         shell.pack();
         shell.open();
@@ -99,7 +82,7 @@ public class Transform {
         header.setExpanded(true);
 
         if (firstFile.getHeader().equals(secondFile.getHeader())) {
-            Service.setCollorNode(header).setExpanded(true);
+            header.setExpanded(true);
         }
 
         createDocumentation(header, firstFile, secondFile);
@@ -109,52 +92,27 @@ public class Transform {
     }
 
     private void createDocumentation(TreeItem header, XmlBean firstFile, XmlBean secondFile) {
-        TreeItem documentation = new TreeItem(header, SWT.NONE);
-        documentation.setText("XMI.documentation");
+        TreeItem documentation = Service.createTreeItem(firstFile.getHeader().getDocumentation(), secondFile.getHeader().getDocumentation(), header, new String[]{"XMI.documentation"});
 
-        TreeItem docExporter = new TreeItem(documentation, SWT.NONE);
-        docExporter.setText(new String[]{"XMI.exporter", firstFile.getHeader().getDocumentation().getExporter()});
+        TreeItem docExporter = Service.createTreeItem(firstFile.getHeader().getDocumentation().getExporter(), secondFile.getHeader().getDocumentation().getExporter(), documentation, new String[]{"XMI.exporter", firstFile.getHeader().getDocumentation().getExporter()});
 
-        if (!firstFile.getHeader().getDocumentation().getExporter().equals(secondFile.getHeader().getDocumentation().getExporter())) {
-            Service.setCollorNode(documentation).setExpanded(true);
-            Service.setCollorNode(docExporter).setExpanded(true);
-        }
+        TreeItem docVersin = Service.createTreeItem(firstFile.getHeader().getDocumentation().getVersion(), secondFile.getHeader().getDocumentation().getVersion(), documentation, new String[]{"XMI.exporterVersion", firstFile.getHeader().getDocumentation().getVersion()});
 
-        TreeItem docVersin = new TreeItem(documentation, SWT.NONE);
-        docVersin.setText(new String[]{"XMI.exporterVersion", firstFile.getHeader().getDocumentation().getVersion()});
-        if (!firstFile.getHeader().getDocumentation().getVersion().equals(secondFile.getHeader().getDocumentation().getVersion())) {
-            Service.setCollorNode(docVersin).setExpanded(true);
-        }
     }
 
     private void createModels(TreeItem header, XmlBean firstFile, XmlBean secondFile) {
         IntStream.range(0, firstFile.getHeader().getModels().size()).forEachOrdered(index -> {
-            TreeItem subModel = new TreeItem(header, SWT.NONE);
-            subModel.setText(new String[]{"XMI.model"});
 
-            TreeItem subModelName = new TreeItem(subModel, SWT.NONE);
-            subModelName.setText(new String[]{"xmi.name", firstFile.getHeader().getModels().get(index).getXmiName()});
+            Model firstModel = firstFile.getHeader().getModels().get(index);
+            Model secondModel =  secondFile.getHeader().getModels().get(index);
 
-            if (!firstFile.getHeader().getModels().get(index).getXmiName().equals(secondFile.getHeader().getModels().get(index).getXmiName())) {
-                Service.setCollorNode(subModel).setExpanded(true);
-                Service.setCollorNode(subModelName).setExpanded(true);
-            }
+            TreeItem subModel = Service.createTreeItem(firstModel, secondModel, header, new String[]{"XMI.model"});
 
-            TreeItem subModelVersion = new TreeItem(subModel, SWT.NONE);
-            subModelVersion.setText(new String[]{"xmi.version", firstFile.getHeader().getModels().get(index).getVersion()});
+            TreeItem subModelName = Service.createTreeItem(firstModel.getXmiName(), secondModel.getXmiName(), subModel, new String[]{"xmi.name", firstModel.getXmiName()});
 
-            if (!firstFile.getHeader().getModels().get(index).getVersion().equals(secondFile.getHeader().getModels().get(index).getVersion())) {
-                Service.setCollorNode(subModelVersion).setExpanded(true);
-            }
+            TreeItem subModelVersion = Service.createTreeItem(firstModel.getVersion(), secondModel.getVersion(), subModel, new String[]{"xmi.version", firstModel.getVersion()});
 
-            TreeItem subModelHref = new TreeItem(subModel, SWT.NONE);
-            subModelHref.setText(new String[]{"href", firstFile.getHeader().getModels().get(index).getHref()});
-
-            if (firstFile.getHeader().getModels().get(index).getHref() != null && secondFile.getHeader().getModels().get(index).getHref() != null) {
-                if (!firstFile.getHeader().getModels().get(index).getHref().equals(secondFile.getHeader().getModels().get(index).getHref())) {
-                    Service.setCollorNode(subModelHref).setExpanded(true);
-                }
-            }
+            TreeItem subModelHref = Service.createTreeItem(firstModel.getHref(), secondModel.getHref(), subModel, new String[]{"href", firstModel.getHref()});
 
         });
     }
@@ -168,15 +126,17 @@ public class Transform {
 
         TreeItem contentUuidDel = new TreeItem(content, SWT.NONE);
         contentUuidDel.setText(new String[]{"xmi.uuidDel", firstFile.getContent().getUuiDel()});
-        createListItems(content, firstFile);
+        createListItems(content, firstFile, secondFile);
 
         return content;
     }
 
-    private void createListItems(TreeItem content, XmlBean firstFile) {
+    private void createListItems(TreeItem content, XmlBean firstFile, XmlBean secondFile) {
         IntStream.range(0, firstFile.getContent().getItems().size()).forEachOrdered(index -> {
-            Optional<Item> xmlItem = Optional.of(firstFile.getContent().getItems().get(index));
-            xmlItem.get().accept(vizitor, content);
+            Optional<Item> firstXmlItem = Optional.of(firstFile.getContent().getItems().get(index));
+            Optional<Item> secondXmlItem = Optional.of(secondFile.getContent().getItems().get(index));
+
+            firstXmlItem.get().accept(vizitor, secondXmlItem.get(), content);
         });
     }
 }

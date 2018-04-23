@@ -4,7 +4,7 @@
 			<XMI.exporter>ASG-Rochade XML Facilities Exporter</XMI.exporter>
 			<XMI.exporterVersion>2.70.003</XMI.exporterVersion>
 		</XMI.documentation>
-		<XMI.model xmi.name='RN.X'
+		<XMI.model xmi.name='RN.Xs'
 				xmi.version='1.6'/>
 		<XMI.model xmi.name='METAAdPPS test'
 				xmi.version='PRODUCTION test'

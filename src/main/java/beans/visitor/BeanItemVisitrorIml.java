@@ -7,79 +7,78 @@ import beans.Items;
 import beans.interfaces.BeanItemVisitor;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.TreeItem;
+import services.Service;
 
 import java.util.stream.IntStream;
 
 public class BeanItemVisitrorIml implements BeanItemVisitor {
 
     @Override
-    public void visit(Item item, TreeItem treeItem) {
+    public void visit(Item item, Object comparingItem, TreeItem treeItem) {
 
-        TreeItem subTreeItem = new TreeItem(treeItem, SWT.NONE);
-        subTreeItem.setText(new String[]{"ITEM"});
+        Item compareItem = (Item) comparingItem;
 
-        TreeItem itemId = new TreeItem(subTreeItem, SWT.NONE);
-        itemId.setText(new String[]{"xmi.id", item.getId()});
+        TreeItem subTreeItem = Service.createTreeItem(item, comparingItem, treeItem, new String[]{"ITEM"});
 
-        TreeItem itemType = new TreeItem(subTreeItem, SWT.NONE);
-        itemType.setText(new String[]{"itemType", item.getItemType()});
+        TreeItem itemId = Service.createTreeItem(item.getId(), ((Item) comparingItem).getId(), subTreeItem, new String[]{"xmi.id"});
 
-        TreeItem itemName = new TreeItem(subTreeItem, SWT.NONE);
-        itemName.setText(new String[]{"itemName", item.getItemName()});
+        TreeItem itemType = Service.createTreeItem(item.getItemType(), ((Item) comparingItem).getItemType(), subTreeItem, new String[]{"itemType", item.getItemType()});
 
-        if (item.getAtributes() != null) {
+        TreeItem itemName = Service.createTreeItem(item.getItemName(), ((Item) comparingItem).getItemName(), subTreeItem, new String[]{"itemName", item.getItemName()});
+
+        if (item.getAtributes() != null && compareItem.getAtributes() != null) {
             IntStream.range(0, item.getAtributes().size()).forEachOrdered(indexAttribute -> {
-                this.visit(item.getAtributes().get(indexAttribute), subTreeItem);
+                this.visit(item.getAtributes().get(indexAttribute), compareItem.getAtributes().get(indexAttribute), subTreeItem);
             });
         }
     }
 
     @Override
-    public void visit(Attributes attributes, TreeItem treeItem) {
+    public void visit(Attributes attributes, Object comparingItem, TreeItem treeItem) {
 
-        TreeItem treeItemAttributes = new TreeItem(treeItem, SWT.NONE);
-        treeItemAttributes.setText(new String[]{"ATTRIBUTES"});
+        Attributes compareAttributes = (Attributes) comparingItem;
 
-        if (attributes.getAttribute() != null) {
+        TreeItem treeItemAttributes = Service.createTreeItem(attributes, compareAttributes, treeItem, new String[]{"ATTRIBUTES"});
+
+
+        if (attributes.getAttribute() != null && compareAttributes.getAttribute() != null) {
             IntStream.range(0, attributes.getAttribute().size()).forEachOrdered(indexAttributes -> {
-                this.visit(attributes.getAttribute().get(indexAttributes), treeItemAttributes);
+                this.visit(attributes.getAttribute().get(indexAttributes), compareAttributes.getAttribute().get(indexAttributes), treeItemAttributes);
             });
         }
     }
 
     @Override
-    public void visit(Attribute attribute, TreeItem treeItem) {
+    public void visit(Attribute attribute, Object comparingItem, TreeItem treeItem) {
 
-        TreeItem treeItemAttribute = new TreeItem(treeItem, SWT.NONE);
-        treeItemAttribute.setText(new String[]{"ATTRIBUTE"});
+        Attribute compareAttribute = (Attribute) comparingItem;
 
-        TreeItem attrType = new TreeItem(treeItemAttribute, SWT.NONE);
-        attrType.setText(new String[]{"attrType", attribute.getAttrType()});
+        TreeItem treeItemAttribute = Service.createTreeItem(attribute, comparingItem, treeItem, new String[]{"ATTRIBUTE"});
 
-        TreeItem attrName = new TreeItem(treeItemAttribute, SWT.NONE);
-        attrName.setText(new String[]{"attrName", attribute.getAttrName()});
+        TreeItem attrType = Service.createTreeItem(attribute.getAttrType(), compareAttribute.getAttrType(), treeItemAttribute, new String[]{"attrType", attribute.getAttrType()});
 
-        TreeItem linkType = new TreeItem(treeItemAttribute, SWT.NONE);
-        linkType.setText(new String[]{"linkType", attribute.getLinkType()});
+        TreeItem attrName = Service.createTreeItem(attribute.getAttrName(), ((Attribute) comparingItem).getAttrName(), treeItemAttribute, new String[]{"attrName", attribute.getAttrName()});
 
-        if (attribute.getItems() != null) {
+        TreeItem linkType = Service.createTreeItem(attribute.getLinkType(), compareAttribute.getLinkType(), treeItemAttribute, new String[]{"linkType", attribute.getLinkType()});
+
+        if (attribute.getItems() != null && compareAttribute.getItems() != null) {
             IntStream.range(0, attribute.getItems().size()).forEachOrdered(indexItems -> {
-                this.visit(attribute.getItems().get(indexItems), treeItemAttribute);
+                this.visit(attribute.getItems().get(indexItems), compareAttribute.getItems().get(indexItems), treeItemAttribute);
             });
         }
     }
 
     @Override
-    public void visit(Items items, TreeItem treeItem) {
-        TreeItem treeItems = new TreeItem(treeItem, SWT.NONE);
-        treeItems.setText(new String[]{"ITEMS"});
+    public void visit(Items items, Object comparingItem, TreeItem treeItem) {
 
-        if (items.getItems() != null) {
+        Items compareItems = (Items) comparingItem;
+
+        TreeItem treeItems = Service.createTreeItem(items, compareItems, treeItem, new String[]{"ITEMS"});
+
+        if (items.getItems() != null && compareItems.getItems() != null) {
             IntStream.range(0, items.getItems().size()).forEachOrdered(indexItem -> {
-                this.visit(items.getItems().get(indexItem), treeItem);
+                this.visit(items.getItems().get(indexItem), compareItems.getItems().get(indexItem), treeItem);
             });
         }
     }
-
-
 }
